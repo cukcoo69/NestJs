@@ -1,0 +1,23 @@
+version: "1.0"
+services:
+  order-app:
+    build:
+      context: ./order-app
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+  payment-app:
+    build:
+      context: ./payment-app
+      dockerfile: Dockerfile
+    depends_on:
+      - "order-app"
+  fe-app:
+    build:
+      context: ./fe-app
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    depends_on:
+      - "payment-app"
+
